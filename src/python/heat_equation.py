@@ -75,10 +75,10 @@ Hs = POs/(Ls**2*THs)
 # Set the time parameters
 timeIncrement   = 10.0*Ts
 startTime       = 0.0*Ts
-stopTime  = 121*timeIncrement
+stopTime  = 11*timeIncrement
 
 # Set the output parameters
-DYNAMIC_SOLVER_DIFFUSION_OUTPUT_FREQUENCY = 1
+DYNAMIC_SOLVER_DIFFUSION_OUTPUT_FREQUENCY = 10
 
 # Set the solver parameters
 MAXIMUM_ITERATIONS   = 1000   # default: 100000
@@ -334,6 +334,13 @@ for elementNumber in muscleElements:
       materialsField.ParameterSetUpdateElement(iron.FieldVariableTypes.U,iron.FieldParameterSetTypes.VALUES, 
   elementNumber,3, AlphaDiff)
 
+# Units used for the problem
+materialsField.ParameterSetUpdateConstant(iron.FieldVariableTypes.V,iron.FieldParameterSetTypes.VALUES,
+    1,Ls)
+materialsField.ParameterSetUpdateConstant(iron.FieldVariableTypes.V,iron.FieldParameterSetTypes.VALUES,
+    2,Ms)
+materialsField.ParameterSetUpdateConstant(iron.FieldVariableTypes.V,iron.FieldParameterSetTypes.VALUES,
+    3,Ts)
 
 materialsField.ParameterSetUpdateStart(iron.FieldVariableTypes.U,iron.FieldParameterSetTypes.VALUES)
 materialsField.ParameterSetUpdateFinish(iron.FieldVariableTypes.U,iron.FieldParameterSetTypes.VALUES)
