@@ -1,24 +1,11 @@
-# geometry files
-boundary_nodes.csv
-elements2.csv
-nodes.csv
-
 # output Detalis
-output/
-outputArtery/
-outputDiffusion/
 output*/
 
 # tilde
 *~
 
-# temporary files
-MainTime_10.part0.exelem
-MainTime_100.part0.exelem
-MainTime_10.part0.exnode
-MainTime_100.part0.exnode
-
 ModifyInputFiles.py
 final/
 
-MainTime*
+#vtk files
+vtk/
