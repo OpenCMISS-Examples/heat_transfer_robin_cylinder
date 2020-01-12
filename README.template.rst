@@ -15,7 +15,7 @@ The resulting mesh contains 135 nodes on 67 quadratic line elements, as shown be
 .. image:: docs/images/transparent.png
    :width: 30%
 
-.. image:: docs/images/1DVHMesh.png
+.. image:: docs/images/Transparent2.svg
    :width: 33%
 
 **Figure:** 1D arteries and mesh.
