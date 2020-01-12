@@ -12,10 +12,10 @@ This involves coupling together of dependent fields (\ie pressure and velocity/f
 In the following example, a 1D network of 24 major arteries has been constructed from the male Visible Human dataset, as shown below.
 The resulting mesh contains 135 nodes on 67 quadratic line elements, as shown below.
 
-.. image:: docs/images/transparent2.svg
+.. image:: docs/images/transparent.png
    :width: 30%
 
-.. image:: docs/images/transparent2.svg
+.. image:: docs/images/transparent2.png
    :width: 33%
 
 **Figure:** 1D arteries and mesh.
