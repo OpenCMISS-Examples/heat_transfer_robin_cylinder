@@ -23,7 +23,7 @@ The resulting mesh contains 135 nodes on 67 quadratic line elements, as shown be
 Simple 0D/lumped parameter RCR Windkessel models are coupled to the 1D model at the outlet boundaries.
 These models use the fluid-electric analog to provide an basic approximation of resistance to flow due to perfusing vascular beds (the R1 and R2 components) and downstream vessel compliance (the C component).
 
-.. figure:: docs/images/RCR.png
+.. figure:: docs/images/transparent2.svg
    :align: center
    :width: 40%
 
