@@ -1,21 +1,52 @@
+======================================================================
+Heat Transfer in a Cylinder with Robin and Neumann Boundary Conditions
+======================================================================
+
+This example solves heat transfer in a cylinder. The purpose of this example is to implement Robin boundary conditions in the OpenCMISS and enable it for convection or radiation heat transfer. 
+
+The boundary conditions at one end of the cylinder are Neumann boundary conditions and over the rest of the boundary are Robin boundary conditions.
+The dimensions of the cylinder are about the same as an adult human arm. The temperature for the whole cylinder initially is 37 Celcius, and suddenly air with 10 Celcius blows over it and cools it down.
+Because the heat flux is higher at the skin, in the beginning, skin temperature drops quickly, but the in-depth temperature remains the same. 
+
+A tetrahedral mesh for the cylinder was generated, and tri-linear simplex interpolation was used for temperature interpolation in the elements.
+
+Running the example
+===================
+
+Python version::
+
+  cd ./src/python
+  mkdir output
+  mpiexec -n 4 python3.4 heat_transfer.py
 
 
-======================================
-Template OpenCMISS example - barebones
-======================================
+Results
+=======
 
-This example shows the barebones required for an examplar Fortran example.  For more detailed information refer to the `master <https://github.com/OpenCMISS-Examples/template_example/tree/master>`_ branch.
+Results can be visualised by `ParaView <https://www.paraview.org/>`_ or running `visualise.cmgui <./src/python/visualiseCoupled1D0D.cmgui>`_ with the `Cmgui visualiser <http://physiomeproject.org/software/opencmiss/cmgui/download>`_.
 
-CMake files
-===========
+The following figures show the temperature distribution in the cylinder.
 
-The *CMakeLists.txt* file in the root directory uses the following *find_package* command::
+.. figure:: docs/images/transparentCyl.png
+   :align: center
+   :width: 30%
 
-  find_package(OpenCMISSLibs 1.3.0 COMPONENTS iron REQUIRED CONFIG)
+   **Figure 1:** Temperature distribution.
 
-What is different here from the basic template in the `master <https://github.com/OpenCMISS-Examples/template_example/tree/master>`_ branch is that we have made use of the *COMPONENTS* option to indicate that only the Iron library is required for this example.
+.. figure:: docs/images/CrossSection.png
+   :align: center
+   :width: 15%
 
-Remember
-========
+   **Figure 2:** Temperature distribution in the cylinder cross-section.
 
-Replace this file with a description about your example using the `README.template.rst <README.template.rst>`_ file as a starting point.
+The expected results from this example are available in `expected_results <./src/python/expected_results>`_ folder.
+
+Prerequisites
+=============
+
+There are two files describing the mesh in the input folder.
+
+License
+=======
+
+License applicable to this example is described in `LICENSE <./LICENSE>`_.

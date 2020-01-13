@@ -17,7 +17,7 @@ Python version::
 
   cd ./src/python
   mkdir output
-  python heat_transfer.py
+  mpiexec -n 4 python3.4 heat_transfer.py
 
 
 Results
