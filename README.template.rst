@@ -2,57 +2,13 @@
 Heat Transfer in a Cylinder with Robin and Neumann Boundary Conditions
 ======================================================================
 
-Computational models can be used to gain mechanical insight into blood flowing in vessels under healthy and pathophysiological states.
-However, constructing full subject-specific CFD models of the entire arterial and/or venous vasculature is currently considered impractical, owing to: (1) the time and resources required to identify, segment, and constrain a model of the billions of vessels in a human body and (2) the computational cost such a model would incur.
+This example solves the heat transfer in a cylinder. The purpose of this example is to implement Robin boundary conditions in the OpenCMISS and enable it for convection or radiation heat transfer. 
 
-As a result, the systemic context of a modeled system is often incorporated into definable models through boundary conditions and/or coupled models.
-These multiscale models restrict higher dimensional (3D/1D) models to a region of interest and rely on simpler, lower dimensional (0D), models to approximate physical behaviour outside the higher-dimensional domain.
-This involves coupling together of dependent fields (\ie pressure and velocity/flow), material fields (\eg fluid viscosity and wall compliance), and geometric fields (\eg vessel diameter) at the interfaces between 3D, 1D, and/or 0D model domains.
+The boundary conditions at one end of the cylinder is Neumann boundary conditions and over the rest of the boundary is Robin boundary conditions.
+The dimensions of the cylinder is about the same as an adult human arm. The temperature for the whole cylinder initially is 37 Celcius and suddenly air with 10 Celcius blows over it and cools it down.
+Because the heat flux is higher at the skin, at the beginning skin temperature drops quickly but the in depth temperature remains the same. 
 
-In the following example, a 1D network of 24 major arteries has been constructed from the male Visible Human dataset, as shown below.
-The resulting mesh contains 135 nodes on 67 quadratic line elements, as shown below.
-
-.. image:: docs/images/transparentCyl.png
-   :width: 30%
-
-.. image:: docs/images/transparent2.png
-   :width: 33%
-
-**Figure:** 1D arteries and mesh.
-
-Simple 0D/lumped parameter RCR Windkessel models are coupled to the 1D model at the outlet boundaries.
-These models use the fluid-electric analog to provide an basic approximation of resistance to flow due to perfusing vascular beds (the R1 and R2 components) and downstream vessel compliance (the C component).
-
-.. figure:: docs/images/transparent2.svg
-   :align: center
-   :width: 40%
-
-   **Figure:** The 3-element RCR Windkessel model
-
-   A flow waveform from published data is applied at the aortic root of the model and interpolated in time from tabulated data using cubic splines.
-   Outlet boundary conditions are provided by the 0D solution.
-
-   OpenCMISS/CellML field mapping capabilities allow for the coupling of the 1D (OpenCMISS) and 0D (CellML) solvers:
-
-   .. literalinclude:: 1DTransientExample.py
-      :language: python
-      :linenos:
-      :start-after: # DOC-START cellml define field maps
-      :end-before: # DOC-END cellml define field maps
-
-   **Snippet:** OpenCMISS/CellML field mappings
-
-   Flow rate (Q) from the 1D Navier-Stokes/Characteristic solver provides the forcing term for the 0D ODE circuit solver.
-   Pressure (P) is returned from the CellML solver to provide constraints on the Riemann invariants of the 1D system, which translate to area boundary conditions for the 1D FEM solver.
-   At each timestep, the 1D and 0D systems are iteratively coupled until the boundary values converge within a user-specified tolerance at the 1D-0D interfaces.
-   This procedure is outlined in the figure below.
-
-   .. figure:: docs/images/1D0DSolver.png
-      :align: center
-      :width: 90%
-
-      **Figure:** Overview of the coupled 1D-0D solution process.
-
+A tetrahedra mesh for the cylinder was genenrated and tri-linear simplex interpolation is used for temperature interpolation in the elements.
 
 Running the example
 ===================
@@ -60,6 +16,7 @@ Running the example
 Python version::
 
   cd ./src/python
+  mkdir output
   python heat_transfer.py
 
 
@@ -67,6 +24,8 @@ Results
 =======
 
 Results can be visualised by `ParaView <https://www.paraview.org/>`_ or running `visualise.cmgui <./src/python/visualiseCoupled1D0D.cmgui>`_ with the `Cmgui visualiser <http://physiomeproject.org/software/opencmiss/cmgui/download>`_.
+
+The following figures show the temperature distribution in the cylinder.
 
 .. figure:: docs/images/transparentCyl.png
    :align: center
