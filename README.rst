@@ -35,7 +35,7 @@ The following figures show the temperature distribution in the cylinder.
 
 .. figure:: docs/images/CrossSection.png
    :align: center
-   :width: 15%
+   :width: 10%
 
    **Figure 2:** Temperature distribution in the cylinder cross-section.
 
