@@ -73,13 +73,13 @@ Results can be visualised by running `visualise.cmgui <./src/python/visualiseCou
    :align: center
    :width: 30%
 
-   **Figure:** Flow rates from the 1D-0D solution. Vessels shown at peak systole
+   **Figure 1:** Temperature distribution.
 
 .. figure:: docs/images/CrossSection.png
    :align: center
-   :width: 30%
+   :width: 25%
 
-   **Figure:** Pressure from the 1D-0D solution. Vessels shown at peak systole
+   **Figure 2:** Temperature distribution in the cylinder cross section.
 
 The expected results from this example are available in `expected_results <./src/python/expected_results>`_ folder.
 
