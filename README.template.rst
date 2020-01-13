@@ -2,13 +2,13 @@
 Heat Transfer in a Cylinder with Robin and Neumann Boundary Conditions
 ======================================================================
 
-This example solves the heat transfer in a cylinder. The purpose of this example is to implement Robin boundary conditions in the OpenCMISS and enable it for convection or radiation heat transfer. 
+This example solves heat transfer in a cylinder. The purpose of this example is to implement Robin boundary conditions in the OpenCMISS and enable it for convection or radiation heat transfer. 
 
-The boundary conditions at one end of the cylinder is Neumann boundary conditions and over the rest of the boundary is Robin boundary conditions.
-The dimensions of the cylinder is about the same as an adult human arm. The temperature for the whole cylinder initially is 37 Celcius and suddenly air with 10 Celcius blows over it and cools it down.
-Because the heat flux is higher at the skin, at the beginning skin temperature drops quickly but the in depth temperature remains the same. 
+The boundary conditions at one end of the cylinder are Neumann boundary conditions and over the rest of the boundary are Robin boundary conditions.
+The dimensions of the cylinder are about the same as an adult human arm. The temperature for the whole cylinder initially is 37 Celcius, and suddenly air with 10 Celcius blows over it and cools it down.
+Because the heat flux is higher at the skin, in the beginning, skin temperature drops quickly, but the in-depth temperature remains the same. 
 
-A tetrahedra mesh for the cylinder was genenrated and tri-linear simplex interpolation is used for temperature interpolation in the elements.
+A tetrahedral mesh for the cylinder was generated, and tri-linear simplex interpolation was used for temperature interpolation in the elements.
 
 Running the example
 ===================
