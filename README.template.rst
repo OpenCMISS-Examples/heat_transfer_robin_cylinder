@@ -59,15 +59,14 @@ Running the example
 
 Python version::
 
-  source <path-to-opencmiss>/install/virtaul_environments/oclibs_venv_pyXY_release/bin/activate
   cd ./src/python
-  python Coupled1D0D.py
+  python heat_transfer.py
 
 
 Results
 =======
 
-Results can be visualised by running `visualise.cmgui <./src/python/visualiseCoupled1D0D.cmgui>`_ with the `Cmgui visualiser <http://physiomeproject.org/software/opencmiss/cmgui/download>`_.
+Results can be visualised by `ParaView <https://www.paraview.org/>`_ or running `visualise.cmgui <./src/python/visualiseCoupled1D0D.cmgui>`_ with the `Cmgui visualiser <http://physiomeproject.org/software/opencmiss/cmgui/download>`_.
 
 .. figure:: docs/images/transparentCyl.png
    :align: center
@@ -79,7 +78,7 @@ Results can be visualised by running `visualise.cmgui <./src/python/visualiseCou
    :align: center
    :width: 25%
 
-   **Figure 2:** Temperature distribution in the cylinder cross section.
+   **Figure 2:** Temperature distribution in the cylinder cross-section.
 
 The expected results from this example are available in `expected_results <./src/python/expected_results>`_ folder.
 
