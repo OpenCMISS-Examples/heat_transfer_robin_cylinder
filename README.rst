@@ -39,7 +39,7 @@ The following figures show the temperature distribution in the cylinder.
 
    **Figure 2:** Temperature distribution in the cylinder cross-section.
 
-The expected results from this example are available in `expected_results <./src/python/expected_results>`_ folder.
+The expected results from this example are available in `expected_results <./src/python/expected-results>`_ folder.
 
 Prerequisites
 =============
