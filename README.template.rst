@@ -69,15 +69,15 @@ Results
 
 Results can be visualised by running `visualise.cmgui <./src/python/visualiseCoupled1D0D.cmgui>`_ with the `Cmgui visualiser <http://physiomeproject.org/software/opencmiss/cmgui/download>`_.
 
-.. figure:: docs/images/1D0DVHFlowrates.png
+.. figure:: docs/images/transparentCyl.png
    :align: center
-   :width: 75%
+   :width: 30%
 
    **Figure:** Flow rates from the 1D-0D solution. Vessels shown at peak systole
 
-.. figure:: docs/images/1D0DVHPressures.png
+.. figure:: docs/images/CrossSection.png
    :align: center
-   :width: 75%
+   :width: 30%
 
    **Figure:** Pressure from the 1D-0D solution. Vessels shown at peak systole
 
