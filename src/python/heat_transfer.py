@@ -9,6 +9,7 @@ from shutil import copyfile
 
 # Intialise OpenCMISS-Iron start
 from opencmiss.iron import iron
+from input.parameters import Problem_Params
 t=time.time()
 # Diagnostics
 #iron.DiagnosticsSetOn(iron.DiagnosticTypes.IN,[1,2,3,4,5],"Diagnostics",["DOMAIN_MAPPINGS_LOCAL_FROM_GLOBAL_CALCULATE"])
@@ -72,22 +73,27 @@ Ks = POs/(Ls*THs)
 CPs = Es/(Ms*THs)
 Hs = POs/(Ls**2*THs)
 
+# import the parameters for solving the problem
+problemParams = Problem_Params()
+
 # Set the time parameters
-timeIncrement   = 10.0*Ts
-startTime       = 0.0*Ts
-stopTime  = 11*timeIncrement
+timeIncrement   = problemParams.timeIncrement*Ts
+startTime       = problemParams.startTime*Ts
+stopTime  = problemParams.timeSteps*timeIncrement
 
 # Set the output parameters
-DYNAMIC_SOLVER_DIFFUSION_OUTPUT_FREQUENCY = 10
+DYNAMIC_SOLVER_DIFFUSION_OUTPUT_FREQUENCY = problemParams.diffusionOutputFrequency
 
 # Set the solver parameters
 MAXIMUM_ITERATIONS   = 1000   # default: 100000
 
-Kcond       = 0.42*Ks 
-AlphaDiff   = Kcond/(4.0e6*RHOs*CPs)
-Ssrc        = 0.0 
-Hconv       = 1.68*Hs
-Tair        = 10*Ts
+Kcond       = problemParams.conductivity*Ks 
+rhoC        = problemParams.rhoC*RHOs*CPs
+AlphaDiff   = Kcond/rhoC
+Ssrc        = problemParams.source*THs/Ts 
+Hconv       = problemParams.convection*Hs
+Tair        = problemParams.Tair*THs
+Tinit       = problemParams.Tinit*THs
 #================================================================================================================================
 #  Problem Control Panel
 #=========================   =======================================================================================================
@@ -146,9 +152,9 @@ basis.CreateFinish()
 if (ProgressDiagnostics):
     print( " == >> MESH << == ")
     
-FileName_ele = "input/cylinder_elements.csv"
-numberOfNodes    = 11476
-numberOfElements = 49243
+FileName_ele = problemParams.tissueElementsFile
+numberOfNodes    = problemParams.numberOfNodes
+numberOfElements = problemParams.numberOfElements
 numberOfLocalNodes = 4
 offset = 1 # offset is 1 if nodes and elements number begin from 0, offset for default = 0
 
@@ -238,7 +244,7 @@ print( numberOfNodes)
 
 # print( "Elapsed time before reading node file is: ", time.time()-t)
 
-FileName_node = "input/cylinder_nodes.csv"
+FileName_node = problemParams.tissueNodesFile
 
 boundaryMarker=0
 nodeNumber = 0
@@ -308,7 +314,7 @@ dependentField.DOFOrderTypeSet(iron.FieldVariableTypes.DELUDELN,iron.FieldDOFOrd
 equationsSet.DependentCreateFinish()
 
 # Initialise dependent field
-dependentField.ComponentValuesInitialise(iron.FieldVariableTypes.U,iron.FieldParameterSetTypes.VALUES,1,37.0*THs)
+dependentField.ComponentValuesInitialise(iron.FieldVariableTypes.U,iron.FieldParameterSetTypes.VALUES,1,Tinit)
 
 dependentField.ParameterSetUpdateStart(iron.FieldVariableTypes.U,iron.FieldParameterSetTypes.VALUES)
 dependentField.ParameterSetUpdateFinish(iron.FieldVariableTypes.U,iron.FieldParameterSetTypes.VALUES)
@@ -359,7 +365,7 @@ equationsSet.SourceCreateFinish()
 for elementNumber in muscleElements:
     elementDomain = decomposition.ElementDomainGet(elementNumber)
     if elementDomain == computationalNodeNumber:
-      sourceField.ParameterSetUpdateElement(iron.FieldVariableTypes.U,iron.FieldParameterSetTypes.VALUES,elementNumber,1,0.0*THs/Ts)
+      sourceField.ParameterSetUpdateElement(iron.FieldVariableTypes.U,iron.FieldParameterSetTypes.VALUES,elementNumber,1,Ssrc)
 
 sourceField.ParameterSetUpdateStart(iron.FieldVariableTypes.U,iron.FieldParameterSetTypes.VALUES)
 sourceField.ParameterSetUpdateFinish(iron.FieldVariableTypes.U,iron.FieldParameterSetTypes.VALUES)
@@ -458,13 +464,13 @@ for nodeNumber in boundary:
   if nodeDomain == computationalNodeNumber:
 
     boundaryConditions.SetNode(dependentField,iron.FieldVariableTypes.DELUDELN,1,1,nodeNumber,1,
-      iron.BoundaryConditionsTypes.ROBIN,[(1.68*Hs)/(4.0e6*RHOs*CPs),(16.8*Hs*THs)/(4.0e6*RHOs*CPs)]) 
+      iron.BoundaryConditionsTypes.ROBIN,[Hconv/rhoC,(Hconv*Tair)/rhoC]) 
   
 for nodeNumber in choppedBoundary:
   nodeDomain = decomposition.NodeDomainGet(nodeNumber,1)
   if nodeDomain == computationalNodeNumber:
     boundaryConditions.SetNode(dependentField,iron.FieldVariableTypes.DELUDELN,1,1,nodeNumber,1,
-      iron.BoundaryConditionsTypes.NEUMANN_POINT,[0.0*THs/Ls])
+      iron.BoundaryConditionsTypes.NEUMANN_POINT,[0.0])
 
 dependentField.ParameterSetUpdateStart(iron.FieldVariableTypes.U,iron.FieldParameterSetTypes.VALUES)
 dependentField.ParameterSetUpdateFinish(iron.FieldVariableTypes.U,iron.FieldParameterSetTypes.VALUES)
