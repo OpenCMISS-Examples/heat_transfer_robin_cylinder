@@ -9,3 +9,5 @@ final/
 
 #vtk files
 vtk/
+
+__pycache__/
