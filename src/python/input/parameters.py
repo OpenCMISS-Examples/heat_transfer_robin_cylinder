@@ -7,8 +7,8 @@ class Problem_Params:
         self.conductivity = 0.42
         self.rhoC = 4.0e6 
         self.source = 0.0
-        self.convection = 1.68
-        self.Tair = 10.0
+        self.convection = 20
+        self.Tair = 0.0
         self.Tinit = 37.0
         self.tissueElementsFile = "input/cylinder_elements.csv"
         self.tissueNodesFile = "input/cylinder_nodes.csv"

@@ -462,7 +462,8 @@ region.NodesGet(nodes)
 for nodeNumber in boundary:
   nodeDomain = decomposition.NodeDomainGet(nodeNumber,1)
   if nodeDomain == computationalNodeNumber:
-
+    #boundaryConditions.SetNode(dependentField,iron.FieldVariableTypes.U,1,1,nodeNumber,1,
+     # iron.BoundaryConditionsTypes.FIXED,[20]) 
     boundaryConditions.SetNode(dependentField,iron.FieldVariableTypes.DELUDELN,1,1,nodeNumber,1,
       iron.BoundaryConditionsTypes.ROBIN,[Hconv/rhoC,(Hconv*Tair)/rhoC]) 
   
