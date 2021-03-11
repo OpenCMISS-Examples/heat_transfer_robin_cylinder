@@ -1,0 +1,15 @@
+# output Detalis
+output*/
+
+# tilde
+*~
+
+ModifyInputFiles.py
+final/
+
+#vtk files
+vtk/
+
+__pycache__/
+
+thesis/
